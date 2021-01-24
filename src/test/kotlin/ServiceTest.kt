@@ -44,13 +44,15 @@ class ServiceTest() {
         service.createMessage(1, 1, "text_2")
         service.createMessage(1, 1, "text_3")
         val result = service.getListOfMessages(1, 1, 2, 1).toString()
-        assertEquals("[Message(messageId=2, message=text_2, isSent=true, isRead=false)]", result)
+        assertEquals("[Message(messageId=2, message=text_2, isSent=true, isRead=true)]", result)
     }
 
     @Test
     fun getListOfMessagesEmpty() {
         val result = service.getListOfMessages(1, 1, 2, 1)
-        assertEquals(null, result)
+        if (result != null) {
+            assertTrue(result.isEmpty())
+        }
     }
 
     @Test
@@ -67,7 +69,7 @@ class ServiceTest() {
     @Test
     fun getChatsNull() {
         val result = service.getChats(1)
-        assertEquals(null, result)
+        assertTrue(result.isEmpty())
     }
 
     @Test
